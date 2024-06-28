@@ -62,3 +62,66 @@ mkfifo pipe2
 
 
 ---
+
+
+# Final Project
+
+## *Service Running a NET Socket*
+
+## Description
+
+This service will run a NET socket with the following specifications:
+
+- Maximum connections: 30
+- The port will be received as a program argument.
+- Every client connection will be handled by a thread or fork.
+- The service will handle the `SIGINT` signal (Ctrl+C).
+
+### Messages Handled by the Service
+
+1. **getInfo**: Returns the service name and version, e.g., "Mike’s service, v0.1".
+2. **getNumberOfPartitions**: Returns the number of partitions of the system.
+   - Can be implemented using bash scripting or calling directly to utilities, e.g., `lsblk -l | grep part`.
+3. **getCurrentKernelVersion**: Returns the kernel version that the system is running (just the numerical part).
+   - Can be implemented using `uname -r`, either through bash scripting or by calling the `uname` utility directly.
+4. **sshdRunning**: Returns `true` or `false` indicating if `sshd` is running.
+   - Should be implemented using `popen()`.
+   - Can use methods like `ps ax|grep sshd`, `netstat -l |grep ssh`, or verifying that `sshd.pid` file exists (`/var/run/sshd.pid`).
+
+### Implementation Details
+
+- For `getInfo`, `getNumberOfPartitions`, and `getCurrentKernelVersion`, two of them can be implemented with bash scripting, and the third one needs to be with `popen` or `execv` (or variations) if applicable.
+
+
+---
+
+### Project Completed:
+
+Follow this steps to test the project:
+
+- In the terminal of the project route run:  gcc -phtread -o net_service server.c client_handler.c
+- Run the server in the port you prefer, in my case: 8080: ./net_service 8080
+
+- **To test the server you can use telnet**
+- In other terminal run: telnet localhost 8080
+- try running the methods:
+```
+$ telnet localhost 8080
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.
+getInfo
+Mike's service, v0.1
+getNumberOfPartitions
+2
+getCurrentKernelVersion
+6.5.0-41-generic
+
+sshdRunning
+false
+```
+
+**Proofs:**
+
+![Proof Server Running](finalProject/proofs/serverRunning.png)
+![Proof Trying server as a Client (sending methods)](finalProject/proofs/sendMethodsClient.png)
