@@ -5,7 +5,7 @@ Unix tasks and finalProject
 
 ---
 
-### Practice 
+## Practice 
 
 ## Comunicación entre dos programas usando tuberías con nombre
 
@@ -31,8 +31,13 @@ void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset)
 
 ### Practica Terminada:
 
-![Practice 2](practices/practice2/principal)
+[Practice 2](practices/practice2/principal)
 
+- *Before* create the pipes with mkfifo
+```
+mkfifo pipe1
+mkfifo pipe2
+```
 
 - To run, inside the practice run in 2 different terminals:
 - Terminal 1:
